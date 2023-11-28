@@ -4,6 +4,7 @@ import com.products.springProducts.exception.ProductNotFoundException;
 import com.products.springProducts.model.Product;
 import com.products.springProducts.model.ProductDTO;
 import com.products.springProducts.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +14,10 @@ import java.util.stream.Collectors;
 import static com.products.springProducts.mapper.IProductMapper.PRODUCT_MAPPER;
 
 @Service
+@Transactional
 public class ProductService implements IProductService {
-    private final ProductRepository productRepository;
-
     @Autowired
-    private ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
+    private ProductRepository productRepository;
 
     private Product getProductByName(String name) {
         return productRepository.findByName(name).orElseThrow(ProductNotFoundException::new);

@@ -4,12 +4,18 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.OptimisticLockType;
+import org.hibernate.annotations.OptimisticLocking;
 
 import java.util.Objects;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@OptimisticLocking(type = OptimisticLockType.DIRTY)
+// OptimisticLocking needed for Modify-Price and Modify Product
+@DynamicUpdate
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

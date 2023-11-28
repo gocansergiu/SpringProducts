@@ -4,11 +4,11 @@ Spring app with basic auth and logic for general products
 Requests: <br><b>
 Create an API that acts as a store management tool
 
-- Create a Github profile if you don't have one
+- Create a GitHub profile if you don't have one
 
 - Use git in a verbose manner, push even if you wrote only one class
 
-- Create a Java, maven based project, Springboot for the web part
+- Create a Java, maven based project, Spring Boot for the web part
 
 - No front-end, you can focus on backend, no need to overcomplicate the structure
 

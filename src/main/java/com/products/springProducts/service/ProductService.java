@@ -14,8 +14,12 @@ import static com.products.springProducts.mapper.IProductMapper.PRODUCT_MAPPER;
 
 @Service
 public class ProductService implements IProductService {
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     private Product getProductByName(String name) {
         return productRepository.findByName(name).orElseThrow(ProductNotFoundException::new);
@@ -25,13 +29,6 @@ public class ProductService implements IProductService {
         return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
     }
 
-    private ProductDTO getProductDTO(ProductDTO productDTO) {
-        Product existingProduct = getProductById(productDTO.getId());
-        existingProduct.setPrice(productDTO.getPrice());
-        existingProduct.setDescription(productDTO.getDescription());
-        existingProduct.setName(productDTO.getName());
-        return PRODUCT_MAPPER.ProductToProductDTOProduct(existingProduct);
-    }
 
     public ProductDTO getProductDTOById(Long id) {
         Product product = getProductById(id);
@@ -51,13 +48,17 @@ public class ProductService implements IProductService {
     }
 
     public ProductDTO updateProduct(ProductDTO productDTO) {
-        return getProductDTO(productDTO);
+        Product existingProduct = getProductById(productDTO.getId());
+        existingProduct.setPrice(productDTO.getPrice());
+        existingProduct.setDescription(productDTO.getDescription());
+        existingProduct.setName(productDTO.getName());
+        return PRODUCT_MAPPER.ProductToProductDTOProduct(productRepository.save(existingProduct));
     }
 
     public ProductDTO changePrice(ProductDTO productDTO) {
         Product existingProduct = getProductById(productDTO.getId());
         existingProduct.setPrice(productDTO.getPrice());
-        return PRODUCT_MAPPER.ProductToProductDTOProduct(existingProduct);
+        return PRODUCT_MAPPER.ProductToProductDTOProduct(productRepository.save(existingProduct));
     }
 
     public ProductDTO createProduct(ProductDTO productDTO) {

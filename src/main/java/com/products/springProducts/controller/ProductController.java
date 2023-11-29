@@ -58,6 +58,4 @@ public class ProductController {
         }
         return ResponseEntity.ok(productService.changePrice(productDTO));
     }
-
-
 }

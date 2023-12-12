@@ -12,7 +12,7 @@
     <artifactId>springProducts</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springProducts</name>
-    <description>Demo project for ING</description>
+    <description>Example project</description>
     <properties>
         <java.version>17</java.version>
     </properties>

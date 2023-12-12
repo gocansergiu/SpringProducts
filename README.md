@@ -19,7 +19,8 @@ API with basic auth</b>
 - The app can be used only if authenticated, as a User you are authorized to use ```/product/all ``` and ```/product/{id} ``` , in order to populate the DB you need to be authorized as Admin:
 - Delete method for deleting a product: ```/product/admin/{id} ```
 - Put method for modifying an existing product: ```/product/admin/modify ``` with product body
-- Put method : ```/product/admin/modify-price ``` to only modify the price
+- Put method : ```/product/admin/modify-price ```
+- To modify the price
   ```/product/admin/add ``` POST METHOD with body example :
    ```ruby
   {
